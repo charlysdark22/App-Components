@@ -7,6 +7,12 @@ import { useColorScheme } from 'nativewind';
 import * as React from 'react';
 import { Image, type ImageStyle, View } from 'react-native';
 
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label"
+import  { useState } from 'react';
+import Form from '@/components/ui/form';
+
+
 const LOGO = {
   light: require('@/assets/images/react-native-reusables-light.png'),
   dark: require('@/assets/images/react-native-reusables-dark.png'),
@@ -25,33 +31,30 @@ const IMAGE_STYLE: ImageStyle = {
 
 export default function Screen() {
   const { colorScheme } = useColorScheme();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
 
+
+  
   return (
     <>
       <Stack.Screen options={SCREEN_OPTIONS} />
       <View className="flex-1 items-center justify-center gap-8 p-4">
-        <Image source={LOGO[colorScheme ?? 'light']} style={IMAGE_STYLE} resizeMode="contain" />
-        <View className="gap-2 p-4">
-          <Text className="ios:text-foreground font-mono text-sm text-muted-foreground">
-            1. Edit <Text variant="code">app/index.tsx</Text> to get started.
-          </Text>
-          <Text className="ios:text-foreground font-mono text-sm text-muted-foreground">
-            2. Save to see your changes instantly.
-          </Text>
-        </View>
-        <View className="flex-row gap-2">
-          <Link href="https://reactnativereusables.com" asChild>
-            <Button>
-              <Text>Browse the Docs</Text>
-            </Button>
-          </Link>
-          <Link href="https://github.com/founded-labs/react-native-reusables" asChild>
-            <Button variant="ghost">
-              <Text>Star the Repo</Text>
-              <Icon as={StarIcon} />
-            </Button>
-          </Link>
-        </View>
+      <Button className='w-[327px] h-[60px] rounded-full'>  
+        <Text>Hola</Text>
+      </Button>
+      <Form 
+        inputClassName='w-[327px] h-[60px] t-[2px] border-radius: 8px border-width: 1px; angle: 0 deg; opacity: 1; '  
+        labelClassName=''
+        label="Email/ Usuario"
+        placeholder="correo@gmail.com"
+        value={email}
+        onChangeText={setEmail}
+      />
+      
+      </View>
+      <View className=" justify-center ">
+      
       </View>
     </>
   );
@@ -66,6 +69,7 @@ function ThemeToggle() {
   const { colorScheme, toggleColorScheme } = useColorScheme();
 
   return (
+  
     <Button
       onPressIn={toggleColorScheme}
       size="icon"
@@ -73,5 +77,6 @@ function ThemeToggle() {
       className="ios:size-9 rounded-full web:mx-4">
       <Icon as={THEME_ICONS[colorScheme ?? 'light']} className="size-5" />
     </Button>
+    
   );
 }
